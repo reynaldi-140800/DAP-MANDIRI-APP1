@@ -1,0 +1,15 @@
+<section class="p-5">
+    <h1 class="text-danger">Parent Component</h1>
+    <h1>{{ title }}</h1>
+    <h3>{{counter}}</h3>
+    <h3>{{textParent}}</h3>
+</section>
+
+<app-child [title]="title"
+
+[(counter)] = "counter"
+
+(textParent)="onChangeMessage($event)">
+</app-child>
+
+<!-- <app-child>(counter)="onChangeCounter($event)"  </app-child> -->

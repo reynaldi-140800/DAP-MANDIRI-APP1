@@ -1,0 +1,12 @@
+<section class="container"><p>child works!</p>
+    <h5>{{ title }}</h5>
+    <h1>{{count}}</h1>
+
+    <div class = "btn-group">
+        <button class="btn btn-outline-primary" (click)="onIncrease()">+</button>
+        <button class="btn btn-outline-danger" (click)="onDecrease()">-</button>
+    </div>
+    <div class ="mb-5">
+        <input type="text" class = "form-control" (change)="onTextInput($event)">
+    </div>
+</section>
