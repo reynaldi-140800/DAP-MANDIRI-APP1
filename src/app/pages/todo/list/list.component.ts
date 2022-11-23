@@ -9,6 +9,7 @@ import { Todo } from '../model/todo';
 export class ListComponent implements OnInit{
   @Input() todosChild: Todo[] = []
   @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter <Todo>()
+  @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter <Todo>()
   constructor(){}
 
   ngOnInit(): void {
@@ -16,6 +17,9 @@ export class ListComponent implements OnInit{
   }
   onCheckTodo(todoCheck: Todo): void {
     this.toggleTodo.emit(todoCheck)
+  }
+  ondeleteTodo(todoDelete: Todo): void {
+    this.deleteTodo.emit(todoDelete)
   }
 
 }

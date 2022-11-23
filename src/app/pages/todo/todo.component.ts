@@ -8,6 +8,7 @@ import { TODO, Todo } from './model/todo';
 })
 export class TodoComponent implements OnInit{
   todosParent: Todo[] = []
+  
 
   constructor(){}
 
@@ -47,6 +48,15 @@ export class TodoComponent implements OnInit{
     Toggletodo.isCompleted = !Toggletodo.isCompleted
     console.log('todo.component.onToggletodo', Toggletodo)
     
+  }
+
+  onDeleteTodo (Deletetodo: Todo): void {
+    for (let index = 0; index < this.todosParent.length; index++) {
+      if (this.todosParent[index].id === Deletetodo.id) {
+        this.todosParent.splice(index, 1)
+      }
+    }
+    sessionStorage.setItem(TODO, JSON.stringify(this.loadTodos))
   }
 
 }

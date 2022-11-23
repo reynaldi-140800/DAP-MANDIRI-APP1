@@ -4,7 +4,9 @@
         <div class="row">
             <div class="col"><app-list 
                 [todosChild]="todosParent"
-                (toggleTodo)="onToggleTodo($event)">
+                (toggleTodo)="onToggleTodo($event)"
+                (deleteTodo)="onDeleteTodo($event)">
+                
             </app-list></div>
             <div class="col"><app-form (saveTodo)="onSaveTodo($event)"></app-form></div>
         </div>
