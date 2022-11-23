@@ -4,6 +4,8 @@ import { PagesComponent } from './pages.component';
 import { HomeModule } from './home/home.module';
 import { CoursesModule } from './courses/courses.module';
 import { PagesRoutingModule } from './pages-routing.module';
+import { TodoModule } from './todo/todo.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { PagesRoutingModule } from './pages-routing.module';
     CommonModule,
     PagesRoutingModule,
     HomeModule,
-    CoursesModule
+    CoursesModule,
+    TodoModule,
+    RouterModule
   ],
   exports: [PagesComponent]
 })
