@@ -2,8 +2,11 @@
     <div class="container text-center">
         <h3><strong><u>TODO</u></strong></h3><br>
         <div class="row">
-            <div class="col"><app-list [todosChild]="todosParent"></app-list></div>
-            <div class="col"><app-form></app-form></div>
+            <div class="col"><app-list 
+                [todosChild]="todosParent"
+                (toggleTodo)="onToggleTodo($event)">
+            </app-list></div>
+            <div class="col"><app-form (saveTodo)="onSaveTodo($event)"></app-form></div>
         </div>
     </div>
 </section>

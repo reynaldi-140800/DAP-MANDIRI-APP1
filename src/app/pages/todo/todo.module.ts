@@ -4,12 +4,11 @@ import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
 import { NgModule } from '@angular/core';
 import { TodoRoutingModule } from './todo-routing.module';
-import { RouterModule } from '@angular/router';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [TodoComponent, ListComponent, FormComponent],
-  imports: [CommonModule, TodoRoutingModule,RouterModule],
+  imports: [CommonModule, TodoRoutingModule, FormsModule, ReactiveFormsModule],
   exports: [TodoComponent]
 })
 export class TodoModule { }

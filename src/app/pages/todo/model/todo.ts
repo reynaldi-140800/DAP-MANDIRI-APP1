@@ -3,3 +3,5 @@ export interface  Todo {
     name: string
     isCompleted: boolean
 }
+
+export const TODO = 'todos'

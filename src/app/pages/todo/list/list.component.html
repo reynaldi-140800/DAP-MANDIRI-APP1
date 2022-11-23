@@ -1,4 +1,28 @@
-<h2>LIST</h2>
+<h2>list</h2>
 <ul class="list-group">
-    <li class="list-group-item" *ngFor="let todo of todosChild">{{ todo.name }} {{ todo.isCompleted }}</li>
+    <li class="list-group-item" *ngFor="let todo of todosChild">
+        <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              [checked]="todo.isCompleted"
+              (click)="onCheckTodo(todo)"
+            />
+            &nbsp;
+            <label class="form-check-label">
+              {{ todo.name }}
+            </label>
+            <button
+              class="btn btn-link btn-sm float-end"
+            >
+              <i class="bi bi-trash" style="font-size: 1.2rem"></i>
+            </button>
+            <button
+              class="btn btn-link btn-sm float-end"
+            >
+              <i class="bi bi-pencil-square" style="font-size: 1.2rem"></i>
+            </button>
+          </div>
+    </li>
 </ul>
+

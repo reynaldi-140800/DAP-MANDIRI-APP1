@@ -1,12 +1,8 @@
-<H2>FORM</H2>
-<div class="row g-3 align-items-center">
-    <div class="col-auto">
-      <label  class="col-form-label">FORM</label>
+<H2>form</H2>
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <div class=" shadow-sm input-group news-input">
+      <input type="checkbox" class="form-check-input m-3">
+      <input type="text" class="form-control" placeholder="INPUT" formControlName="name"/>
+      <button class="btn btn-outline-primary" [disabled]="!todoForm.valid">ADD</button>
     </div>
-    <div class="col-auto">
-      <input type="text"  class="form-control">
-    </div>
-    <div class="col-auto">
-      <button type="button" class="btn btn-primary">submit</button>
-    </div>
-  </div>
+</form>
