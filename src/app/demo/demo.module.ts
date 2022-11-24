@@ -8,6 +8,7 @@ import { ChildAaComponent } from './component-a/child-aa/child-aa.component';
 import { ChildAbComponent } from './component-a/child-ab/child-ab.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './child/child.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ChildComponent } from './child/child.component';
   imports: [
     CommonModule,
     RouterModule,
-    DemoRoutingModule
+    DemoRoutingModule,
+    SharedModule
   ],
   exports: [
     ComponentAComponent,

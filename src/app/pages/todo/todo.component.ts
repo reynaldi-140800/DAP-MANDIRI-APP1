@@ -7,12 +7,16 @@ import { TODO, Todo } from './model/todo';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit{
-  todosParent: Todo[] = [] ///// DEFINE TODOSPARENT UNTUK MELAKUKAN ASIGN KEPADA INTERFACE TODO ////////
+  todosParent!: Todo[]
+  //todosParent: Todo[] = [] ///// DEFINE TODOSPARENT UNTUK MELAKUKAN ASIGN KEPADA INTERFACE TODO ////////
   private _todo!: Todo // NANTINYA AKAN DIKIRIM KE CHILD / FORM
+  isLoading: boolean = true
   constructor(){}
 
   ngOnInit(): void {
-    this.loadTodos()
+    setTimeout(()=> {
+      this.loadTodos()
+    },5000)
   }
   //////////////// ADD /////////////////////////
   loadTodos(): void {

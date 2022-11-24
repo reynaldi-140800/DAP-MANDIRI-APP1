@@ -1,36 +1,38 @@
-<div class="container">
-    <h1>Ini Comonent A</h1>
-    <router-outlet></router-outlet>
-    <a routerLink="/component-b" class="btn btn-primary">Ke component B</a>
-    <button class="btn btn-outline-warning" [disabled]="klik" (click)="showMe()">Show Me</button>
-    <h4> {{message}}</h4>
-    
-    <h3>Name: {{ name }}</h3>
-    <h3>Address: {{ address }}</h3>
+<section class="d-flex p-5 text-sm start mt-5" appHiighlight>
+    <div class="container md">
+        <h1>Ini Comonent A</h1>
+        <router-outlet></router-outlet>
+        <a routerLink="/component-b" class="btn btn-primary">Ke component B</a>
+        <button class="btn btn-outline-warning" [disabled]="klik" (click)="showMe()">Show Me</button>
+        <h4> {{message}}</h4>
+        
+        <h3>Name: {{ name }}</h3>
+        <h3>Address: {{ address }}</h3>
 
-    <p>Participants: {{ participants }}</p>
+        <p>Participants: {{ participants }}</p>
 
-    <!-- cara lain -->
-    <!-- <div *ngFor="let participant of participants">
-        <p>{{ participant }}</p>
-    </div> -->
+        <!-- cara lain -->
+        <!-- <div *ngFor="let participant of participants">
+            <p>{{ participant }}</p>
+        </div> -->
 
-    <!-- concat -->
-    <ul class= "list-group">
-        <li class = "list-group-item" *ngFor="let bahasa of characterGenshin ; index as i">
-            <span [ngStyle]="{'color': i % 2 == 0 ? 'red': 'blue'}">
-                {{ bahasa.name }}
-            </span>
+        <!-- concat -->
+        <ul class= "list-group">
+            <li class = "list-group-item" *ngFor="let bahasa of characterGenshin ; index as i">
+                <span [ngStyle]="{'color': i % 2 == 0 ? 'red': 'blue'}">
+                    {{ bahasa.name }}
+                </span>
 
-        </li>
-    </ul>
-    <div class="mt-5 mb-5">
-        <h3 [innerHTML]="messageHover" (mouseover)="mouseOver()" (mouseout)="mouseOut()"></h3>
+            </li>
+        </ul>
+        <div class="mt-5 mb-5">
+            <h3 [innerHTML]="messageHover" (mouseover)="mouseOver()" (mouseout)="mouseOut()"></h3>
+        </div>
+        <div class ="mb-5">
+            <input type="text" class = "form-control" (change)="onMessageInput($event)">
+        </div>
+        <h5 class="mt-t mb-5">{{messageInput}}</h5>
+
+
     </div>
-    <div class ="mb-5">
-        <input type="text" class = "form-control" (change)="onMessageInput($event)">
-    </div>
-    <h5 class="mt-t mb-5">{{messageInput}}</h5>
-
-
-</div>
+</section>

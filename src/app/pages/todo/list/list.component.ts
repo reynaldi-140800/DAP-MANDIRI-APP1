@@ -7,7 +7,7 @@ import { Todo } from '../model/todo';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit{
-  @Input() todosChild: Todo[] = []
+  @Input() todosChild!: Todo[]
   @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter <Todo>()  // TOGGLE
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter <Todo>()  // DELETE
   @Output() editTodo: EventEmitter<Todo> = new EventEmitter <Todo>()    // EDIT
