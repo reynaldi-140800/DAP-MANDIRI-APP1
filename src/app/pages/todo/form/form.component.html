@@ -1,8 +1,9 @@
-<H2>form</H2>
-<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+<H2>FORM</H2>
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()"> <!-- UNTUK MELAKUKAN SUBMIT KEDALAM SESSION -->
   <div class=" shadow-sm input-group news-input">
       <input type="checkbox" class="form-check-input m-3">
       <input type="text" class="form-control" placeholder="INPUT" formControlName="name"/>
-      <button class="btn btn-outline-primary" [disabled]="!todoForm.valid">ADD</button>
+      <button class="btn btn-outline-primary" [disabled]="!todoForm.valid">ADD</button> 
+      <!-- LINE 6 BERGUNA UNTUK DISABLED BUTTON JIKA KONDISI YANG DIBERI BELUM TERPENUHI-->
     </div>
 </form>

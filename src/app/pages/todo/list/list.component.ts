@@ -8,18 +8,27 @@ import { Todo } from '../model/todo';
 })
 export class ListComponent implements OnInit{
   @Input() todosChild: Todo[] = []
-  @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter <Todo>()
-  @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter <Todo>()
+  @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter <Todo>()  // TOGGLE
+  @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter <Todo>()  // DELETE
+  @Output() editTodo: EventEmitter<Todo> = new EventEmitter <Todo>()    // EDIT
   constructor(){}
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     
   }
+
+  /////////////// CHECK //////////////////
   onCheckTodo(todoCheck: Todo): void {
     this.toggleTodo.emit(todoCheck)
   }
+  /////////////// DELETE ////////////////////
   ondeleteTodo(todoDelete: Todo): void {
     this.deleteTodo.emit(todoDelete)
+  }
+
+  ////////////////// EDIT ////////////////////
+  oneditTodo(todoEdit: Todo): void {
+    this.editTodo.emit(todoEdit)
   }
 
 }

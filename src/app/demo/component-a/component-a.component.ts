@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Employee } from '../101/employee';
 
 @Component({
   selector: 'app-component-a',
@@ -54,6 +55,10 @@ export class ComponentAComponent implements OnInit {
     setTimeout(() => {
     this.klik = !this.klik
     }, 5000);
+
+    const employee: Employee = new Employee()
+    employee.fullName = 'Joko'
+    employee.address = 'Bali'
   }
 
   message: string = ''

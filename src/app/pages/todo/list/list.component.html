@@ -1,4 +1,4 @@
-<h2>list</h2>
+<h2>LIST</h2>
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let todo of todosChild">
         <div class="form-check">
@@ -20,7 +20,8 @@
             <button
               class="btn btn-link btn-sm float-end"
             >
-              <i class="bi bi-pencil-square" style="font-size: 1.2rem"></i>
+              <i class="bi bi-pencil-square" style="font-size: 1.2rem" 
+              (click)="oneditTodo(todo)"  ></i>
             </button>
           </div>
     </li>
