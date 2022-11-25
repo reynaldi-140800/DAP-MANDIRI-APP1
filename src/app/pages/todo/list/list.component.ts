@@ -20,7 +20,11 @@ export class ListComponent implements OnInit{
   }
   onLoadTodo(): void {
     this.isLoading = false
-    this.todos = this.todoService.getAll()
+    this.todoService.getAll().subscribe({
+      next: (todos: Todo[])=>{
+        this.todos = todos
+      }
+    })  
   }
 
   /////////////// CHECK //////////////////
@@ -29,6 +33,6 @@ export class ListComponent implements OnInit{
   }
   /////////////// DELETE ////////////////////
   ondeleteTodo(todoDelete: Todo): void {
-    this.todoService.onDeleteTodo(todoDelete)
+    this.todoService.onDeleteTodo(todoDelete).subscribe()
   }
 }

@@ -20,4 +20,5 @@
     </div>
     <!-- LINE 6 BERGUNA UNTUK DISABLED BUTTON JIKA KONDISI YANG DIBERI BELUM TERPENUHI-->
   </div>
+  <app-validation-message [control]="todoForm.get('name')" [field]="'todo'"></app-validation-message>
 </form>

@@ -54,7 +54,7 @@ export class FormComponent implements OnInit {
   ////////// TOMBOL SUBMIT /////////////
   onSubmit(): void {
     console.log(this.todoForm.value);
-    this.todoService.save(this.todoForm.value);
+    this.todoService.save(this.todoForm.value).subscribe()
     this.todoForm.reset();
     this.router.navigateByUrl('todo');
   }
