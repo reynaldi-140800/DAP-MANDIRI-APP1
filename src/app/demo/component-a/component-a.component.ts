@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Employee } from '../101/employee';
 
@@ -7,7 +7,16 @@ import { Employee } from '../101/employee';
   templateUrl: './component-a.component.html',
   styleUrls: ['./component-a.component.scss']
 })
-export class ComponentAComponent implements OnInit {
+export class ComponentAComponent 
+  implements 
+  OnInit, 
+  OnChanges, 
+  OnDestroy,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked  {
 
   // kita bisa tampilin data dari variabel
   name: string = 'Milea';
@@ -34,10 +43,36 @@ export class ComponentAComponent implements OnInit {
     }
     return string
   }
+  componentName = 'Component A';
 
   constructor(
     private readonly route: ActivatedRoute
   ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes:', changes);
+    console.log(`ngOnChanges ${this.componentName} called!`);
+  }
+  
+  ngOnDestroy(): void {
+    console.log(`ngOnDestroy ${this.componentName} called!`);
+  }
+  ngDoCheck(): void {
+    console.log(`ngDoCheck ${this.componentName} called!`);
+  }
+  ngAfterContentInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  ngAfterContentChecked(): void {
+    throw new Error('Method not implemented.');
+  }
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  ngAfterViewChecked(): void {
+    throw new Error('Method not implemented.');
+  }
+  
+  
 
   ngOnInit(): void {
     // this.route.queryParams.subscribe((params) => {

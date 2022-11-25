@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Todo } from '../model/todo';
+import { TodoService } from '../service/todo.service';
 
 @Component({
   selector: 'app-form',
@@ -12,11 +14,22 @@ export class FormComponent {
   @Output() todoChange: EventEmitter<Todo> = new EventEmitter<Todo>()
   // @Output() saveTodo: EventEmitter<Todo> = new EventEmitter<Todo>()  //// SAVE ////
 
-  constructor() {
+  constructor(private readonly todoService: TodoService, private readonly route : ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe({
+      next: (params) =>{
+        // console.log(params['id']);
+        
+        const { id } = params
+        ///// +id ini menjadikan yang string -> number
+        ///// berlaku untuk bilangan bulat
+        this.todo = this.todoService.get(+id)
+        this.setFormValue(this.todo)
+      }
+    })
   }
 
   /////////// EDIT /////////////
@@ -34,7 +47,7 @@ export class FormComponent {
   ////////// TOMBOL SUBMIT /////////////
   onSubmit(): void {
     console.log(this.todoForm.value)
-    this.todoChange.emit(this.todoForm.value) 
+    this.todoService.save(this.todoForm.value)
     this.todoForm.reset()    
   }
 
@@ -46,7 +59,6 @@ export class FormComponent {
       this.todoForm.controls['isCompleted']?.setValue(Formtodo.isCompleted)
     }    
   }
-
 
   // getter
   // tambahkan ! untuk memberikan kesan getter name

@@ -4,16 +4,19 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HiighlightDirective } from './directives/hiighlight.directive';
 import { BsButtonDirective } from './directives/bs-button.directive';
+import { DateCustomPipe } from './directives/date-custom.pipe';
+import { BadgeCustomPipe } from './directives/badge-custom.pipe';
 
 const components = [
   HeaderComponent,
   FooterComponent,
   HiighlightDirective,
-  BsButtonDirective
+  BsButtonDirective,
+  DateCustomPipe
 ]
 
 @NgModule({
-  declarations: [...components, BsButtonDirective],
+  declarations: [...components, BadgeCustomPipe],
   imports: [
     CommonModule
   ],

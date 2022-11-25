@@ -1,9 +1,9 @@
-<h2>LIST</h2>
-<div class="spinner-border" role="status" *ngIf="!todosChild">
+<h2>{{' list' | uppercase}}</h2>
+<div class="spinner-border" role="status" *ngIf="!todos">
   <span class="sr-only"></span>
 </div>
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let todo of todosChild">
+  <li class="list-group-item" *ngFor="let todo of todos">
     <div class="form-check">
       <input
         type="checkbox"
@@ -33,7 +33,7 @@
         <i
           class="bi bi-pencil-square"
           style="font-size: 1.2rem"
-          (click)="oneditTodo(todo)"
+          routerLink="/todo/{{todo.id}}"
         ></i>
       </button>
     </div>
