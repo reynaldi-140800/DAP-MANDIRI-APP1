@@ -9,10 +9,6 @@ import { TodoService } from '../service/todo.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit{
-  // @Input() todosChild!: Todo[]
-  // @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter <Todo>()  // TOGGLE
-  // @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter <Todo>()  // DELETE
-  // @Output() editTodo: EventEmitter<Todo> = new EventEmitter <Todo>()    // EDIT
   todos: Todo[]=[]
   isLoading: boolean = true
   constructor(private readonly todoService: TodoService){}
@@ -35,7 +31,4 @@ export class ListComponent implements OnInit{
   ondeleteTodo(todoDelete: Todo): void {
     this.todoService.onDeleteTodo(todoDelete)
   }
-
-  ////////////////// EDIT ////////////////////
-  
 }

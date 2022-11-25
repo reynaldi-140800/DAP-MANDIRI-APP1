@@ -1,11 +1,23 @@
 <H2>FORM</H2>
-<form [formGroup]="todoForm" (ngSubmit)="onSubmit()"> <!-- UNTUK MELAKUKAN SUBMIT KEDALAM SESSION -->
-  <div class=" shadow-sm input-group news-input">
-      <input type="checkbox" class="form-check-input m-3">
-      <input type="text" class="form-control {{ isFormValid('name') }}"  placeholder="INPUT" formControlName="name"/>
-      <button [disabled]="!todoForm.valid" appBsButton routerLink="/todo">ADD</button> 
-      <div class="invalid-feedback" *ngIf="name.errors?.['required']">TODO WAJIB DIISI</div>
-      <div class="invalid-feedback" *ngIf="name.errors?.['minlength']">ISI MINIMAL 3 KARAKTER</div>
-      <!-- LINE 6 BERGUNA UNTUK DISABLED BUTTON JIKA KONDISI YANG DIBERI BELUM TERPENUHI-->
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <!-- UNTUK MELAKUKAN SUBMIT KEDALAM SESSION -->
+  <div class="shadow-sm input-group news-input">
+    <input type="checkbox" class="form-check-input m-3" />
+    <input
+      type="text"
+      class="form-control {{ isFormValid('name') }}"
+      placeholder="INPUT"
+      formControlName="name"
+    />
+    <button [disabled]="!todoForm.valid" appBsButton>
+      ADD
+    </button>
+    <div class="invalid-feedback" *ngIf="name.errors?.['required']">
+      TODO WAJIB DIISI
     </div>
+    <div class="invalid-feedback" *ngIf="name.errors?.['minlength']">
+      ISI MINIMAL 3 KARAKTER
+    </div>
+    <!-- LINE 6 BERGUNA UNTUK DISABLED BUTTON JIKA KONDISI YANG DIBERI BELUM TERPENUHI-->
+  </div>
 </form>
