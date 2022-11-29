@@ -1,42 +1,55 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.scss']
 })
 export class ChildComponent implements OnInit {
-  //two way binding
-  @Input() counter: number = 0
-  @Output() counterChange =  new EventEmitter<number>()
+  @Input() title:string='nokia'
+  // @Output() counter= new EventEmitter<number>()
+  @Output() message= new EventEmitter<string>()
 
-  @Input() title: string = 'Rafi'
-  //@Output() counter = new EventEmitter<number>()      // one way binding
-  @Output() textParent =  new EventEmitter<string>()
-  
-  textChild: string = ''
+  //two way data binding
+  @Input() counter:number=0;
+  @Output() counterChange = new EventEmitter<number>()
 
-  count: number = 0
+  //mandirian baru
+  @Input() messageMandirianInput:string=''
+  @Output() messageMandirianInputChange= new EventEmitter<string>()
+
+  messageMandirian:string=''
+  onMessageInputMandirian($event:any):void{
+    const {value} = $event.target
+    this.messageMandirianInputChange.emit(value)
+  }
+
+  count:number=0
   constructor() { }
 
   ngOnInit(): void {
   }
+
   onIncrease(){
-    this.count++
-    this.counterChange.emit(this.count)
+    this.count++;
+    this.counterChange.emit(this.count);
   }
 
   onDecrease(){
-    this.count--
-    this.counterChange.emit(this.count)
+    if(this.count)
+    this.count--;
+    this.counterChange.emit(this.count);
   }
 
-  onTextInput($event: any): void{ // ubah ke string jika ingin memakai return
-    console.log('$event:', $event)
-    console.log('$event.target.value:', $event.target.value)
+  messageInput:string='';
+  onMessageInput($event:any): void {
     const {value} = $event.target
-    value.toLowerCase() === 'mandiri'? this.textChild = 'Aku Mandirian' : this.textChild = 'Aku tetap mandirian'
-    this.textParent.emit(this.textChild)
+    if (value == 'mandiri'){
+      this.messageInput='aku mandirian'
+    }else{
+      this.messageInput='aku tetap mandirian'
+    }
+    this.message.emit(this.messageInput)
+
   }
 }

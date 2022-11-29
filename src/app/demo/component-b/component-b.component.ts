@@ -7,32 +7,25 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./component-b.component.scss']
 })
 export class ComponentBComponent implements OnInit {
+  id:number=0;
 
-  // untuk menangnkap data path variable (data pasti bentuknya string)
-  id: string = '';
-  
   constructor(
-    // ini observable
-    // jadi kita harus melakukan subscribe
     private readonly route: ActivatedRoute
-  ){}
+  ) { }
 
-  // lifecyce
-  // ngOnInit() => akan dipanggil ketika component-b dipanggil
   ngOnInit(): void {
     this.route.params.subscribe({
-      next: (params) => {
-        console.log('params:', params['id']) // buat cek di console
-        // this.id = parseInt(params['id']); //reassign id (apapun yang dikirim di path variable, itu pasti string, makanya bisa pake parseInt)
-
-        // tampung di variabel sementara untuk cek kondisi
-        const temp = Number(params['id']); // jika params['id'] bisa diubah ke number
-
-        // kalo datanya truty, print datanya
-        if(temp){ // jika params['id'] bisa diubah ke number
-          this.id = params['id']; // reassign id
+      next: (params)=>{
+        console.log('params:', params['id'] );
+        console.log('typeof params:', typeof params['id']);
+        console.log('typeof this.id:', typeof this.id);
+        const temp=Number(params['id']);
+        console.log('temp:',temp);
+        if(temp){
+          this.id=params[' id']
         }
       }
     })
   }
+
 }

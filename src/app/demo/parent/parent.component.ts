@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-parent',
@@ -6,19 +6,20 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./parent.component.scss']
 })
 export class ParentComponent implements OnInit {
-  title:string = 'title from parent.component gaes'
-  counter: number = 0
-  textParent: string = ''
-
-
-  constructor(){}
+  title:string='title dari parent';
+  count:number=0;
+  messageInputParent:string='';
+  messageMandirianParent:string='';
+  constructor() { }
 
   ngOnInit(): void {
   }
-  onChangeCounter (count: number): void {
-    this.counter = count
+
+  onChangeCounter(counter:number):void{
+    this.count=counter;
   }
-  onChangeMessage (text: string): void {
-    this.textParent = text
+  onMessage(message:string):void{
+    this.messageInputParent=message;
   }
+
 }

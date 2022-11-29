@@ -1,40 +1,37 @@
 import { Injectable } from '@angular/core';
-import { observable, Observable, Observer } from 'rxjs';
-import { TODO, Todo } from '../model/todo';
+import { Observable, Observer } from 'rxjs';
+import { Todo, TODO } from '../model/todo.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoService {
-  private todos: Todo[]=[]
-  private storage: Storage = sessionStorage
-  constructor() { }
+  storage: Storage = sessionStorage;
+  private todos: Todo[] = [];
+
+  constructor() {}
 
   getAll(): Observable<Todo[]> {
-    return new Observable<Todo[]>((observer: Observer<Todo[]>)=>{
-    const sessionTodos: string = this.storage.getItem(TODO) as string
-    try{
-        // TERNARY
-        // kondisi ? 'bener' : 'tidak benar'
-        const todos: Todo[] = sessionTodos ? JSON.parse(sessionTodos) : [{
-          id:1,
-          name: 'Makan',
-          isCompleted: false
-        },]
-        this.todos = todos
-        this.storage.setItem(TODO, JSON.stringify(this.todos))
-
-        this.setToStorage()
-        observer.next(this.todos)
-        
-      }catch(err: any){
-        observer.error(err.message)
-    }
-    }) 
+    return new Observable<Todo[]>((observer: Observer<Todo[]>) => {
+      const sessionTodos: string = this.storage.getItem(TODO) as string;
+      try {
+        if (!sessionTodos) {
+          const todos: Todo[] = [];
+          this.todos = todos;
+          observer.next(this.todos);
+        } else {
+          this.todos = JSON.parse(sessionTodos);
+          observer.next(this.todos);
+        }
+        this.setToStorage;
+      } catch (err: any) {
+        observer.error(err.message);
+      }
+    });
   }
 
   save(todo: Todo): Observable<void> {
-    return new Observable<void>((observer: Observer<void>)=>{
+    return new Observable<void>((observer: Observer<void>) => {
       try {
         if (todo.id) {
           this.todos = this.todos.map((t) => {
@@ -43,44 +40,58 @@ export class TodoService {
           });
         } else {
           todo.id = this.todos.length + 1;
-          this.todos.push(todo)
-          observer.next()
+          this.todos.push(todo);
+          observer.next();
         }
         this.setToStorage();
       } catch (err: any) {
         observer.error(err.message);
       }
-    })
+    });
+  }
+
+  delete(todo: Todo): Observable<void> {
+    return new Observable<void>((observer: Observer<void>) => {
+      try {
+        for (let index = 0; index < this.todos.length; index++) {
+          if (this.todos[index].id === todo.id) {
+            this.todos.splice(index, 1);
+          }
+        }
+        
+        this.setToStorage();
+        observer.next();
+      } catch (err: any) {
+        observer.error(err.message);
+      }
+    });
+  }
+
+  toggle(todo: Todo): Observable<void> {
+    return new Observable<void>((observer: Observer<void>) => {
+      try {
+        this.setToStorage();
+        observer.next();
+      } catch (err: any) {
+        observer.error(err.message);
+      }
+    });
   }
 
   private setToStorage(): void {
-    this.storage.setItem(TODO, JSON.stringify(this.todos))
+    this.storage.setItem(TODO, JSON.stringify(this.todos));
   }
 
-  onDeleteTodo (Deletetodo: Todo): Observable<void> {
-    return new Observable<void>((observer: Observer<void>)=> {
-      for (let index = 0; index < this.todos.length; index++) {
-        if (this.todos[index].id === Deletetodo.id) {
-          this.todos.splice(index, 1)
-        }
+
+  get(id: number): Observable<Todo> {
+    return new Observable<Todo>((observer :Observer<Todo>)=>{
+      try{
+        observer.next(this.todos.find((t)=> t.id === Number(id)) as Todo)
       }
-      sessionStorage.setItem(TODO, JSON.stringify(this.todos))
-      observer.next()
+      catch(err: any){
+        observer.next(err.message)
+      }
     })
-  }
 
-  onToggleTodo (Toggletodo: Todo): void {
-    Toggletodo.isCompleted = !Toggletodo.isCompleted
-    console.log('todo.component.onToggletodo', Toggletodo)
   }
-
-  get(id: number):Todo{
-    try{
-      return this.todos.find((t)=> t.id === id) as Todo
-    }catch(err: any){
-      return err.message
-    }
-  }
-
-  
 }

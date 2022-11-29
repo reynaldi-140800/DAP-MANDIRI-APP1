@@ -1,0 +1,41 @@
+<h3>List</h3>
+<div class="spinner-border text-primary" role="status" *ngIf="isLoading">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let todo of todos">
+    <div class="form-check">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        [checked]="todo.isCompleted"
+        (click)="onCheckTodo(todo)"
+      />
+      &nbsp;
+      <label class="form-check-label">
+        <span
+          class="text-decoration-line-through"
+          *ngIf="todo.isCompleted; else isNotCompleted"
+        >
+          {{ todo.name }}
+        </span>
+        <ng-template #isNotCompleted>{{ todo.name }}</ng-template>
+      </label>
+
+      <button
+        class="btn btn-link btn-sm float-end"
+        (click)="onDeleteTodo(todo)"
+        [ngClass]="{ 'visually-hidden': todo.isCompleted }"
+      >
+        <i class="bi bi-trash" style="font-size: 1.2rem"></i>
+      </button>
+
+      <button 
+      class="btn btn-link btn-sm float-end"
+      routerLink="/todo/ {{todo.id}}" 
+      >
+        <i class="bi bi-pencil-square" style="font-size: 1.2rem"></i>
+      </button>
+    </div>
+  </li>
+</ul>

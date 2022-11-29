@@ -7,52 +7,55 @@ import { Employee } from '../101/employee';
   templateUrl: './component-a.component.html',
   styleUrls: ['./component-a.component.scss']
 })
-export class ComponentAComponent 
-  implements 
-  OnInit, 
-  OnChanges, 
-  OnDestroy,
-  DoCheck,
-  AfterContentInit,
-  AfterContentChecked,
-  AfterViewInit,
-  AfterViewChecked  {
-
-  // kita bisa tampilin data dari variabel
-  name: string = 'Milea';
-  address: string = 'Bandung';
-  participants: string[] = ['bulan', 'bintang', 'matahari']
+export class ComponentAComponent implements OnInit, OnChanges, OnDestroy, DoCheck, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
+  name:string='Noki';
+  address:string='Jogji';
+  participants:string[]=['Bumi, Mars, Jupiter']
   languages = {
-    name: 'Angular',
-    difficulty: 'Intermediate',
-  }
-  characterGenshin = [{
-    name: 'Lumine',
-    vision: 'dendro'
-  },{
-    name: 'Raiden',
-    vision: 'electro'
-  }]
-  klik: boolean = true
+    name:'angular',
+    level:'advance'
+  } 
+ // decorate the property with @Input()
 
-  // cara lain data binding array object
-  characterGenshins(): string {
-    let string = ''
-    for(let i = 0; i < this.characterGenshin.length; i++){
-      string += `${this.characterGenshin[i].name} dengan vision ${this.characterGenshin[i].vision}, `
+  onMessage():string{
+    return 'onMessage';
+  }
+
+  onViewLanguage():string{
+    return `${this.languages.name} ${this.languages.level}`
+  }
+  
+
+  employees=[
+    {
+      name:'Adi',
+      address:'Bulan',
+      unit:'Keuangan'
+    },
+    {
+      name:'Adam',
+      address:'Matahari',
+      unit:'Audit'
+    },
+    {
+      name:'Rahma',
+      address:'Mars',
+      unit:'IT'
     }
-    return string
-  }
-  componentName = 'Component A';
+  ]
 
-  constructor(
-    private readonly route: ActivatedRoute
-  ) { }
+  isDisabled:boolean=true
+  componentName = 'Component A';
+  constructor() {
+    console.log(`constructor ${this.componentName} called!`);
+  }
   ngOnChanges(changes: SimpleChanges): void {
     console.log('changes:', changes);
     console.log(`ngOnChanges ${this.componentName} called!`);
   }
-  
+  ngOnInit(): void {
+    console.log(`ngOnInit ${this.componentName} called!`);
+  }
   ngOnDestroy(): void {
     console.log(`ngOnDestroy ${this.componentName} called!`);
   }
@@ -60,74 +63,67 @@ export class ComponentAComponent
     console.log(`ngDoCheck ${this.componentName} called!`);
   }
   ngAfterContentInit(): void {
-    throw new Error('Method not implemented.');
+    console.log(`ngAfterContentInit ${this.componentName} called!`);
   }
   ngAfterContentChecked(): void {
-    throw new Error('Method not implemented.');
+    console.log(`ngAfterContentChecked ${this.componentName} called!`);
   }
   ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
+    console.log(`ngAfterViewInit ${this.componentName} called!`);
   }
   ngAfterViewChecked(): void {
-    throw new Error('Method not implemented.');
-  }
-  
-  
-
-  ngOnInit(): void {
-    // this.route.queryParams.subscribe((params) => {
-
-      // destruct object params
-      // const { name, address } = params;
-      // kalo mau di hidden ketika gaada isi dari request param
-      // if(!name || !address) {
-      //   document.getElementById("h3").style.display = 'none';
-      // }
-    //   this.name = name;
-    //   this.address = address;
-
-    // })
-    setTimeout(() => {
-    this.klik = !this.klik
-    }, 5000);
-
-    const employee: Employee = new Employee()
-    employee.fullName = 'Joko'
-    employee.address = 'Bali'
+    console.log(`ngAfterViewChecked ${this.componentName} called!`);
   }
 
-  message: string = ''
-  showMe(): void{
-    this.message = 'KU CINTA YAE MIKO'
-  } 
+//   ngOnInit(): void {
+//     // this.route.queryParams.subscribe((params)=>{
+//     //   const{name,address}=params;
+//     //   this.name=name;
+//     //   this.address=address;
+//     // })
+//     setTimeout(()=>{
+//       this.isDisabled=!this.isDisabled
+    
+//     console.log(this.languages);
+//   },5000)
+//   const employee: Employee = new Employee();
+//   employee.fullName='Joka';
+//   employee.address='Bali';
+//   console.log(employee);
+  
 
-  messageHover: string = 'kochi kochi senpai!'
+// };
+
+ 
+
+
+  message:string='';
+  showMe():void{
+    this.message = 'klik klik'
+  }
+
+  messageHover:string = 'Hover akooh';
   mouseOut(){
-    this.messageHover = 'chotto ... watashi ni mite tte yo !!'
+    this.messageHover = 'Lagii';
+
   }
   mouseOver(){
-    this.messageHover = 'baka! betsuni .. kore wa anta no tame ja nai, suki ja nai shi ...'
+    this.messageHover = 'thankseu';
   }
-  messageInput: string = ''
-  onMessageInput($event: any): void{ // ubah ke string jika ingin memakai return
-    console.log('$event:', $event)
-    console.log('$event.target.value:', $event.target.value)
+
+  messageInput:string='';
+  onMessageInput($event:any): void {
     const {value} = $event.target
-    value.toLowerCase() === 'mandiri'? this.messageInput = 'Aku Mandirian' : this.messageInput = 'Aku tetap mandirian'
-
-    // if (value.toLowerCase() === 'mandiri') {              ============= ada return
-    //   this.messageInput = 'aku ' + value.toLowerCase() + 'an'
-    //   return this.messageInput
-    // } this.messageInput = 'saya tetap mandirian'
-    // return this.messageInput
-
-
-    // if (value.toLowerCase() === 'mandiri'){                        ============== biasa
-    //   this.messageInput = 'aku ' + value.toLowerCase() + 'an'
-    // }else{
-    //   this.messageInput = "saya tetap mandirian"
-    // }
-
-
+    if (value == 'mandiri'){
+      this.messageInput='aku mandirian'
+    }else{
+      this.messageInput='aku tetap mandirian'
+    }
+    // console.log('$event', $event);
+    // console.log('$event.target.value', $event.target.value);
+    // const {value} = $event.target
+    // this.messageInput = value;
+    
+    
   }
 }

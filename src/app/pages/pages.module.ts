@@ -1,20 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PagesComponent } from './pages.component';
 import { HomeModule } from './home/home.module';
+import { PagesComponent } from './pages.component';
 import { CoursesModule } from './courses/courses.module';
+import { CoursesComponent } from './courses/courses.component';
+import { RouterModule } from '@angular/router';
 import { PagesRoutingModule } from './pages-routing.module';
+import { HomeRoutingModule } from './home/home-routing.module';
+import { CoursesRoutingModule } from './courses/courses-routing.module';
+import { SharedModule } from '../shared/shared.module';
+
+
 
 @NgModule({
   declarations: [
-    PagesComponent,
+    PagesComponent
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
-    HomeModule,
-    CoursesModule,
+    RouterModule,
+    SharedModule
+  
   ],
-  exports: [PagesComponent]
+  exports:[PagesComponent]
 })
 export class PagesModule { }

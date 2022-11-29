@@ -1,0 +1,100 @@
+<!-- courses -->
+<section class="p-5 bg-light text-dark" id="courses">
+  <div class="container">
+    <div class="row align-items-center" > 
+      <h3 class="text-center text-dark mt-3 mb-3"><i class="bi bi-calendar-fill rounded-circle" ></i>  All Courses</h3>
+    </div>
+    <div class="row class-center g-4">
+      <div class="col-md-6 col-lg-4 col-sm-12"*ngFor="let courses of onCourses">
+        <div class="card bg-light text-dark">
+          <div class="card-body">
+            <div class="h1 mb-3">
+              <img src="{{courses.image}}" alt="profil-1" class="card-img-top">
+            </div>
+            <h5 class="card-title">
+              <i class="bi bi-calendar-range p-2"> </i>  {{courses.title}} </h5>
+              <p class="card-text">{{courses.desc}}</p>
+              <div class="row">
+                <div class="col-7">
+                  <div class="progress">
+                    <div class="progress-bar {{courses.progress}}">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <p>{{courses.level}}</p>
+                  </div>
+                </div>
+                <div class="col-5">
+                  <a href="" class="btn btn-primary md-1">
+                    <i class="bi bi-chevron-right"></i> Preview</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- <div class="col-md-6 col-lg-4 col-sm-12">
+            <div class="card bg-light text-dark">
+              <div class="card-body">
+                <div class="h1 mb-3">
+                  <img src="../../../../assets/images/ionic.png" alt="profil-1" class="card-img-top">
+                </div>
+                <h5 class="card-title">
+                  <i class="bi bi-calendar-range p-2"></i>Card Title</h5>
+                  <p class="card-text"> Some quick example text to build on the card title and make up the bulk of the card's content.
+                  </p>
+                  <div class="row">
+                    <div class="col-7">
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="50">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <p>Intermediate</p>
+                      </div>
+                    </div>
+                    <div class="col-5">
+                      <a href="" class="btn btn-primary md-1">
+                        <i class="bi bi-chevron-right"></i> Preview</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-6 col-lg-4 col-sm-12">
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <div class="h1 mb-3">
+                            <img src="../../../../assets/images/js.png" alt="profil-1" class="card-img-top">
+                        </div>
+                        <h5 class="card-title">
+                            <i class="bi bi-calendar-range p-2"></i>Card Title</h5>
+                            <p class="card-text">
+                                Some quick example text to build on the card title and make up
+                                the bulk of the card's content.
+                              </p>
+                              <div class="row">
+                                <div class="col-7">
+                                  <div class="progress">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 70%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="75">
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <p>Hard</p>
+                                  </div>
+                                </div>
+                                <div class="col-5">
+                                  <a href="" class="btn btn-primary md-1">
+                                    <i class="bi bi-chevron-right"></i> Preview
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div> -->
+                        <a routerLink="/courses" class="col-lg-3 mx-auto md-1 mt-5 btn btn-outline-primary align-items-center">Show More</a>
+                      </div>
+
+                              
+                              

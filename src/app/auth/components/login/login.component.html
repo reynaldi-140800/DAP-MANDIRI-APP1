@@ -1,0 +1,47 @@
+<section id="login" class="login mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-title">
+              <h3>LOGIN</h3>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-floating mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': isFormValid('email')}"
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                    formControlName="email"
+                  />
+                  <label for="floatingInput">Email address</label>
+                  <app-validation-message
+                    [control]="loginForm.get('password')"></app-validation-message>
+                </div>
+                <div class="form-floating">
+                  <input
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                    formControlName="password"
+                  />
+                  <label for="floatingPassword">Password</label>
+                  <app-validation-message
+                    [control]="loginForm.get('password')"
+                    [field]="'password'"></app-validation-message>
+                </div>
+                <div class="d-grid gap-2 btn-login">
+                  <button class="btn btn-outline-primary" type="submit">
+                    LOGIN
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

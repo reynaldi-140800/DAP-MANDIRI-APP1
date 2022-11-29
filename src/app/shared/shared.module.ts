@@ -1,30 +1,41 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { HiighlightDirective } from './directives/hiighlight.directive';
-import { BsButtonDirective } from './directives/bs-button.directive';
-import { DateCustomPipe } from './directives/date-custom.pipe';
-import { BadgeCustomPipe } from './directives/badge-custom.pipe';
-import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
-import { StringUtil } from './utils/string.util';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
-const components = [
-  HeaderComponent,
-  FooterComponent,
-  HiighlightDirective,
-  BsButtonDirective,
-  DateCustomPipe,
-  ValidationMessageComponent,
-  BadgeCustomPipe
-]
+import { RouterModule } from '@angular/router';
+import { HighlightDirective } from './directive/highlight.directive';
+import { BsButtonDirective } from './directive/bs-button.directive';
+import { DateCustomPipe } from './pipes/date-custom.pipe';
+import { ValidationMessageComponent } from './components/validation-message/validation-message.component';
+import { StringUtil } from './utils/string.util.service';
+
+
 
 @NgModule({
-  declarations: [...components],
-  imports: [
-    CommonModule
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    NotFoundComponent,
+    HighlightDirective,
+    BsButtonDirective,
+    DateCustomPipe,
+    ValidationMessageComponent
   ],
-  exports: [...components],
+  imports: [
+    CommonModule,
+    RouterModule,
+
+  ],
+  exports:[
+    HeaderComponent,
+    FooterComponent,
+    HighlightDirective,
+    BsButtonDirective,
+    DateCustomPipe,
+    ValidationMessageComponent,
+  ],
   providers:[StringUtil]
 })
 export class SharedModule { }

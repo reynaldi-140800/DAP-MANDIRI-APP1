@@ -13,4 +13,4 @@ export const VALIDATION_MESSAGES: any = {
     nbdatepickermin: 'Tanggal yang dipilih saat ini lebih awal dari tanggal minimum yang diizinkan.',
     nbdatepickermax: 'Tanggal yang dipilih saat ini lebih lambat dari tanggal maksimum yang diizinkan.',
     already: 'Kolom %s tidak boleh sama.',
-}
+  };

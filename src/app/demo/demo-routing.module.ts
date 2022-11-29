@@ -8,32 +8,43 @@ import { ParentComponent } from "./parent/parent.component";
 
 const routes: Routes = [
     {
-        path: "parent",
-        component: ParentComponent
+      path: 'component-a',
+      component: ComponentAComponent,
+      children: [
+        {
+          // eager loading
+          path: 'child-aa', // -> /component-a/child-aa
+          component: ChildAaComponent
+        },
+        {
+          path: 'child-ab', // /component-a/child-ab
+          component: ChildAbComponent
+        },
+        {
+          path: '',
+          redirectTo: 'child-aa',
+          pathMatch: 'full'
+        }
+      ]
     },
     {
-        path: 'component-a',
-        component: ComponentAComponent,
-        children:[
-            {
-                path: 'child-aa',
-                component: ChildAaComponent,
-            },
-            {
-                path: 'child-ab',
-                component: ChildAbComponent
-            }
-        ]
-    },
-    {
-        path: 'component-b/:id',
-        component: ComponentBComponent
-    }
-]
+      path: 'parent',
+      component: ParentComponent,
 
-@NgModule({
+    },
+    {
+      path: 'component-b/:id',
+      component: ComponentBComponent
+    },
+    {
+        path: '',
+        redirectTo: 'component-a',
+        pathMatch: 'full'
+      }
+  ];
+  
+  @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
-})
-
-export class DemoRoutingModule {}
+  })
+  export class DemoRoutingModule { }
