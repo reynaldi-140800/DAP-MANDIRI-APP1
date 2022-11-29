@@ -10,12 +10,13 @@ export class AuthService{
         return new Observable<LoginResponse | null>((observer: 
         Observer<LoginResponse | null>)=>{
             try {
-                // Email: admin@mail.com // password: password
+                ////////// Email: admin@mail.com // password: password ///////////////
                 const { email, password } = payload
                 if (email === 'admin@mail.com' && password === 'password'){
                     const LoginResponse: LoginResponse = 
                     { email: email, accessToken: '12345' }
                     this.storage.setItem('token', JSON.stringify(LoginResponse))
+                    observer.next(LoginResponse)
                 }else{
                     observer.next(null)
                 }

@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
     const payload = this.loginForm.value;
     this.authService.login(payload).subscribe({
       next: (token: LoginResponse | null) => {
-        if(token) this.router.navigateByUrl('todos');
+        if(token){
+          this.router.navigateByUrl('todo')
+        } 
         else {
           Swal.fire({
             icon: 'error',

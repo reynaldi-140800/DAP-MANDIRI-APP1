@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable, switchAll } from 'rxjs';
+import { CanActivate, CanActivateChild, Router } from '@angular/router';
 import Swal from 'sweetalert2'
 
 @Injectable({
@@ -8,6 +7,12 @@ import Swal from 'sweetalert2'
 })
 export class RouteGuard implements CanActivate, CanActivateChild {
   constructor(private readonly router:Router){}
+  canActivate(): boolean{
+    return this.authorize()
+  }
+  canActivateChild(): boolean{
+    return this.authorize()
+  }
 
   private authorize():boolean{
     const authToken:boolean = (sessionStorage.getItem('token')!==null);
@@ -21,12 +26,4 @@ export class RouteGuard implements CanActivate, CanActivateChild {
     }
     return authToken
   }
-  
-  canActivate(): boolean {
-    return this.authorize();
-  }
-
-  canActivateChild(): boolean {
-    return true;
-    }
 }

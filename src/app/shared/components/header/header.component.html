@@ -6,8 +6,9 @@
         class="navbar-toggler"
         data-bs-toggle="collapse"
         data-bs-target="#navmenu">
-    <span class="navbar-toggler-icon"></span>
-    </button>
+        <span class="navbar-toggler-icon"></span>
+        </button> 
+    </div>
     
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
@@ -19,6 +20,12 @@
             </li>
         </ul>
     </div>
-    <a routerLink="/auth/login" class="btn btn-primary">LOGIN</a>
-    </div>
+    <ng-container *ngIf="!onLoggedIn(); else isLoggedIn">
+       <button type="button" routerLink="/auth/login" class="btn btn-primary"> LOGIN</button>y
+    </ng-container>
+
+    <ng-template #isLoggedIn>
+        <button type="button" class="btn btn-primary btn-light login"
+        (click)="onLoggedOut()">LOGOUT</button>
+    </ng-template>
 </nav>
