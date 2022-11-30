@@ -1,7 +1,7 @@
 export interface Todo{
     id:number,
     name:string,
-    isCompleted:boolean
+    isCompleted:boolean,
   }
 
   export const TODO = 'todo'
@@ -9,5 +9,5 @@ export interface Todo{
   export enum TodoField{
     ID='id',
     NAME='name',
-    IS_COMPLETED='isCompleted'
+    IS_COMPLETED='isCompleted',
   }

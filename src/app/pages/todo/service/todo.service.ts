@@ -1,5 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Observable} from 'rxjs';
+import { ApiResponse } from 'src/app/shared/model/api-respon.model';
 import { Todo, TODO } from '../model/todo.model';
 
 @Injectable({
@@ -9,89 +11,75 @@ export class TodoService {
   storage: Storage = sessionStorage;
   private todos: Todo[] = [];
 
-  constructor() {}
+  constructor(
+    private readonly http: HttpClient
+  ) {}
 
-  getAll(): Observable<Todo[]> {
-    return new Observable<Todo[]>((observer: Observer<Todo[]>) => {
-      const sessionTodos: string = this.storage.getItem(TODO) as string;
+  private baseUrl: string = 'api/v1/todos'
+
+  getAll(): Observable<ApiResponse<Todo[]>> {
       try {
-        if (!sessionTodos) {
-          const todos: Todo[] = [];
-          this.todos = todos;
-          observer.next(this.todos);
-        } else {
-          this.todos = JSON.parse(sessionTodos);
-          observer.next(this.todos);
-        }
-        this.setToStorage;
+        return this.http.get<ApiResponse<Todo[]>>(this.baseUrl, {
+          headers: this.setHeaders()
+        })
       } catch (err: any) {
-        observer.error(err.message);
+        return err.message
       }
-    });
   }
 
-  save(todo: Todo): Observable<void> {
-    return new Observable<void>((observer: Observer<void>) => {
+  save(todo: Todo): Observable<ApiResponse<Todo>> {
       try {
+        const headers = this.setHeaders()
         if (todo.id) {
-          this.todos = this.todos.map((t) => {
-            if (t.id === todo.id) t = todo;
-            return t;
-          });
-        } else {
-          todo.id = this.todos.length + 1;
-          this.todos.push(todo);
-          observer.next();
-        }
-        this.setToStorage();
-      } catch (err: any) {
-        observer.error(err.message);
-      }
-    });
-  }
+          return this.http.put<ApiResponse<Todo>>(this.baseUrl, todo, {
+            headers: headers
+          })
+        } 
 
-  delete(todo: Todo): Observable<void> {
-    return new Observable<void>((observer: Observer<void>) => {
-      try {
-        for (let index = 0; index < this.todos.length; index++) {
-          if (this.todos[index].id === todo.id) {
-            this.todos.splice(index, 1);
-          }
-        }
+        return this.http.post<ApiResponse<Todo>>(this.baseUrl, todo, {
+          headers: headers 
+        })
         
-        this.setToStorage();
-        observer.next();
       } catch (err: any) {
-        observer.error(err.message);
+        return err.message
       }
-    });
   }
 
-  toggle(todo: Todo): Observable<void> {
-    return new Observable<void>((observer: Observer<void>) => {
-      try {
-        this.setToStorage();
-        observer.next();
-      } catch (err: any) {
-        observer.error(err.message);
-      }
-    });
+  get(id: string): Observable<ApiResponse<Todo>>{
+    try {
+      const headers = this.setHeaders()
+      return this.http.get<ApiResponse<Todo>>(`${this.baseUrl}/${id}`, { headers: headers })
+    } catch (error: any) {
+      return error.message
+    }
   }
 
-  private setToStorage(): void {
-    this.storage.setItem(TODO, JSON.stringify(this.todos));
+  remove(todo: Todo): Observable<ApiResponse<string>>{
+    try {
+      const headers = this.setHeaders()
+      return this.http.delete<ApiResponse<string>>(`${this.baseUrl}/${todo.id}`, { headers: headers })
+    } catch (error: any) {
+      return error.message
+    }
   }
 
+  toggle(todo: Todo): Observable<void>{
+    try {
+      const headers = this.setHeaders()
+      todo.isCompleted = !todo.isCompleted
+      const { id, name, isCompleted } = todo
+      return this.http.put<void>(this.baseUrl, { id, name, isCompleted }, { headers })
+    } catch (error: any) {
+      return error.message
+    }
+  }
 
-  get(id: number): Observable<Todo> {
-    return new Observable<Todo>((observer :Observer<Todo>)=>{
-      try{
-        observer.next(this.todos.find((t)=> t.id === Number(id)) as Todo)
-      }
-      catch(err: any){
-        observer.next(err.message)
-      }
+  private setHeaders(): HttpHeaders{
+    const token = sessionStorage.getItem('token') as string
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
     })
-
   }
+
+  
 }

@@ -1,41 +1,44 @@
-<h3>List</h3>
-<div class="spinner-border text-primary" role="status" *ngIf="isLoading">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let todo of todos">
-    <div class="form-check">
-      <input
-        type="checkbox"
-        class="form-check-input"
-        [checked]="todo.isCompleted"
-        (click)="onCheckTodo(todo)"
-      />
-      &nbsp;
-      <label class="form-check-label">
-        <span
-          class="text-decoration-line-through"
-          *ngIf="todo.isCompleted; else isNotCompleted"
+<section class="container mt-5 p-5">
+  <h1>LIST</h1>
+  <div class="shadow-sm p-3 mb-5 bg-body rounded">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let todo of todos">
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [checked]="todo.isCompleted"
+          (click)="onCheckTodo(todo)"
+        />
+        &nbsp;
+        <label class="form-check-label">
+          <span
+            class="text-decoration-line-through"
+            *ngIf="todo.isCompleted; else isNotCompleted"
+          >
+            {{ todo.name }}
+          </span>
+          <ng-template #isNotCompleted>{{ todo.name }}</ng-template>
+        </label>
+        &nbsp;
+        <!-- <label for="" [innerHTML]="todo.isCompleted"></label> -->
+        <div class="btn-group float-end">
+          <button
+          class="btn btn-outline-danger btn-sm"
+          (click)="onDeleteTodo(todo)"
         >
-          {{ todo.name }}
-        </span>
-        <ng-template #isNotCompleted>{{ todo.name }}</ng-template>
-      </label>
-
-      <button
-        class="btn btn-link btn-sm float-end"
-        (click)="onDeleteTodo(todo)"
-        [ngClass]="{ 'visually-hidden': todo.isCompleted }"
-      >
-        <i class="bi bi-trash" style="font-size: 1.2rem"></i>
-      </button>
-
-      <button 
-      class="btn btn-link btn-sm float-end"
-      routerLink="/todo/ {{todo.id}}" 
-      >
-        <i class="bi bi-pencil-square" style="font-size: 1.2rem"></i>
-      </button>
-    </div>
-  </li>
-</ul>
+          <i class="bi bi-trash" style="font-size: 1.2rem"></i> Hapus
+        </button>
+        <button
+          class="btn btn-outline-success btn-sm"
+          routerLink="/todo/form/{{ todo.id }}"
+        >
+          <i class="bi bi-pencil-square" style="font-size: 1.2rem"></i> Edit
+        </button>
+        </div>
+      </div>
+    </li>
+    <button class="btn btn-primary" routerLink="/todo/form"> PINDAH FORM</button>
+  </ul>
+</div>
+</section>

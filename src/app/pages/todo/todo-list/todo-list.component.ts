@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TODO, Todo } from '../model/todo.model';
-import { TodoService } from '../service/todo.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { ApiResponse } from "src/app/shared/model/api-respon.model";
+import Swal from "sweetalert2";
+import { Todo } from "../model/todo.model";
+import { TodoService } from "../service/todo.service";
 
 @Component({
   selector: 'app-todo-list',
@@ -9,33 +12,56 @@ import { TodoService } from '../service/todo.service';
 })
 export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
-  isLoading: boolean = true;
-  constructor(private readonly todoService: TodoService) {}
+  isLoading: boolean = false;
+
+  constructor(private readonly todoService: TodoService, private readonly router: Router) { }
 
   ngOnInit(): void {
-    this.onLoadTodo()
+    this.onLoadTodo();
+  }
+
+  onLoadTodo(): void {
+    this.isLoading = true;
+    this.todoService.getAll().subscribe({
+      next: (response: ApiResponse<Todo[]>) => {
+        this.isLoading = false;
+        this.todos = response.data;
+      }
+    });
   }
 
   onCheckTodo(todo: Todo): void {
-    todo.isCompleted=!todo.isCompleted
-    this.todoService.toggle(todo).subscribe()
-  }
-
-  onLoadTodo() {
-    this.isLoading = false;
-    this.todoService.getAll().subscribe({
-      next:(todos:Todo[])=>{
-        this.todos=todos
-      }
-    })
+    this.todoService.toggle(todo).subscribe({});
   }
 
   onDeleteTodo(todo: Todo): void {
-    this.todoService.delete(todo).subscribe()
+    if (todo.isCompleted) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Todo sudah selesai tidak bisa dihapus!'
+      })
+    } else {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          );
+          this.todoService.remove(todo).subscribe(() => {
+            this.onLoadTodo();
+          });
+        }
+      });
+    }
   }
-
-  // onEditTodo(todo: Todo): void {
-  //   this.todoService()
-  // }
-
 }
