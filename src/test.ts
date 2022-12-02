@@ -18,6 +18,7 @@ declare const require: {
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting(),
+  {teardown: {destroyAfterEach: true}} ////// mengatasi error yang dari sebelumnya command line ng tes --code-coverage --no-watch
 );
 
 // Then we find all the tests.
